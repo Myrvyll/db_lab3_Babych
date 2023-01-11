@@ -72,6 +72,7 @@ data.columns = pd.Series(data.columns).apply(to_snake_case)
 data['clutch_completion'] = data['clutch_completion'].apply(to_bool)
 data.rename(columns={'study_name':'study_number', 'island':'island_name'}, inplace=True)
 data['date_egg'] = data['date_egg'].map(to_datetime)
+data = data.replace({np.NaN: None})
 
 
 
@@ -164,8 +165,8 @@ with connection:
 
     pointer.execute("SELECT * FROM penguinrecords")
 
-    for row in pointer:
-        print(row)
+    # for row in pointer:
+    #     print(row)
 
     connection.commit()
 
